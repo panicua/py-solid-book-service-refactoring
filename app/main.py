@@ -15,15 +15,17 @@ class Book:
         else:
             raise ValueError(f"Unknown display type: {display_type}")
 
-    def print_book(self, print_type: str) -> None:
+
+class Printer:
+    @staticmethod
+    def print_book(book, print_type: str) -> None:
         if print_type == "console":
-            print(f"Printing the book: {self.title}...")
-            self.display("console")
+            print(f"Printing the book: {book.title}...")
+            book.display("console")
         elif print_type == "reverse":
-            print(f"Printing the book in reverse: {self.title}...")
-            self.display("reverse")
-        else:
-            raise ValueError(f"Unknown print type: {print_type}")
+            print(f"Printing the book in reverse: {book.title}...")
+            book.display("reverse")
+        raise ValueError(f"Unknown print type: {print_type}")
 
 
 class Serializer:
@@ -36,8 +38,8 @@ class Serializer:
             for tag in ("title", "content"):
                 ET.SubElement(root, tag).text = getattr(book, tag)
             return ET.tostring(root, encoding="unicode")
-        else:
-            raise ValueError(f"Unknown serialize type: {serialize_type}")
+
+        raise ValueError(f"Unknown serialize type: {serialize_type}")
 
     def deserialize(self):
         ...
@@ -48,7 +50,7 @@ def main(book: Book, commands: list[tuple[str, str]]) -> None | str:
         if cmd == "display":
             book.display(method_type)
         elif cmd == "print":
-            book.print_book(method_type)
+            Printer.print_book(book, method_type)
         elif cmd == "serialize":
             return Serializer.serialize(book, method_type)
 
