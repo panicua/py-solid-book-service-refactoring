@@ -18,10 +18,10 @@ class Book:
     def print_book(self, print_type: str) -> None:
         if print_type == "console":
             print(f"Printing the book: {self.title}...")
-            print(self.content)
+            self.display("console")
         elif print_type == "reverse":
             print(f"Printing the book in reverse: {self.title}...")
-            print(self.content[::-1])
+            self.display("reverse")
         else:
             raise ValueError(f"Unknown print type: {print_type}")
 
