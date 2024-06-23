@@ -33,10 +33,8 @@ class Serializer:
             return json.dumps({"title": book.title, "content": book.content})
         elif serialize_type == "xml":
             root = ET.Element("book")
-            title = ET.SubElement(root, "title")
-            title.text = book.title
-            content = ET.SubElement(root, "content")
-            content.text = book.content
+            for tag in ("title", "content"):
+                ET.SubElement(root, tag).text = getattr(book, tag)
             return ET.tostring(root, encoding="unicode")
         else:
             raise ValueError(f"Unknown serialize type: {serialize_type}")
