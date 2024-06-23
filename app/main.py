@@ -41,6 +41,9 @@ class Serializer:
         else:
             raise ValueError(f"Unknown serialize type: {serialize_type}")
 
+    def deserialize(self):
+        ...
+
 
 def main(book: Book, commands: list[tuple[str, str]]) -> None | str:
     for cmd, method_type in commands:
