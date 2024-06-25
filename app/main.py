@@ -6,16 +6,16 @@ from app.serializers import JSONSerializer, XMLSerializer
 
 def main(book: Book, commands: list[tuple[str, str]]) -> None | str:
     display_mapping = {
-        "console": ConsoleDisplay(),
+        "console": ConsoleDisplay,
         "reverse": ReverseDisplay()
     }
     print_mapping = {
-        "console": ConsolePrinter(),
-        "reverse": ReversePrinter()
+        "console": ConsolePrinter,
+        "reverse": ReversePrinter
     }
     serialize_mapping = {
-        "json": JSONSerializer(),
-        "xml": XMLSerializer()
+        "json": JSONSerializer,
+        "xml": XMLSerializer
     }
 
     for cmd, method_type in commands:
